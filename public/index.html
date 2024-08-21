@@ -7,49 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
         integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <style>
-        form {
-            padding: 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            padding-right: 50px;
-        }
 
-        #messages {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-        }
-
-        #messages li {
-            padding: 5px 10px;
-        }
-
-        #messages li:nth-child(odd) {
-            background: #eee;
-        }
-    </style>
 </head>
 
 <body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3">Tech space chatter</h1>
+            <p class="lead">Select which room you'd like to join below!!!</p>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="row">
-            <ul id="messages"></ul>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <form action="">
-                    <div class="input-group">
-                        <input id="m" autocomplete="off" type="text" class="form-control" placeholder="Message..."
-                            aria-label="Message...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="submit">Send</button>
-                        </span>
-                    </div>
-                </form>
-            </div>
+            <ul class="list-group col">
+                <a href="/javascript" class="list-group-item list-group-item-action">Javascript</a>
+                <a href="/swift" class="list-group-item">Swift</a>
+                <a href="/css" class="list-group-item">CSS</a>
+            </ul>
         </div>
     </div>
 
@@ -62,25 +36,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
         integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
         crossorigin="anonymous"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io('/tech');
-        // when ever there is sth happening to the form(submit sth) it will emit 
-        $('form').submit(() => {
-            socket.emit('message', $('#m').val());
-            $('#m').val('');
-            return false;
-        })
 
-        socket.on('connect', () => {
-            //emiting to all 
-            socket.emit('message', 'user connected');
-        })
-
-        socket.on('message', (msg) => {
-            $('#messages').append($('<li>').text(msg));
-        })
-    </script>
 </body>
 
 </html>
