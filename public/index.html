@@ -64,7 +64,7 @@
         crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        const socket = io.connect();
+        const socket = io('/tech');
         // when ever there is sth happening to the form(submit sth) it will emit 
         $('form').submit(() => {
             socket.emit('message', $('#m').val());
