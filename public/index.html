@@ -64,10 +64,21 @@
         crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        const socket = io.connect('http://localhost:3000');
-        socket.on('message', (data) => {
-            console.log(data);
-            socket.emit('another event', { ray: 'I am good' })
+        const socket = io.connect();
+        // when ever there is sth happening to the form(submit sth) it will emit 
+        $('form').submit(() => {
+            socket.emit('message', $('#m').val());
+            $('#m').val('');
+            return false;
+        })
+
+        socket.on('connect', () => {
+            //emiting to all 
+            socket.emit('message', 'user connected');
+        })
+
+        socket.on('message', (msg) => {
+            $('#messages').append($('<li>').text(msg));
         })
     </script>
 </body>
